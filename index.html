@@ -947,29 +947,72 @@
 // ═══════════════════════════
 // CONFIG
 // ═══════════════════════════
-const ADMIN_PASSWORD = 'solefinder2025'; // ← cambia aquí tu contraseña
+const ADMIN_PASSWORD = 'solefinder2025';
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwAIAt6E5bPdiwaBq87PV-n2EetyBmTON1g9ZPTOwQxYBlE6wVgH2prFASaAF2EFMo99g/exec';
 
 // ═══════════════════════════
 // STATE
 // ═══════════════════════════
-let products  = JSON.parse(localStorage.getItem('sf_products')  || '[]');
-let clientes  = JSON.parse(localStorage.getItem('sf_clientes')  || '[]');
-let ventas    = JSON.parse(localStorage.getItem('sf_ventas')    || '[]');
+let products   = [];
+let clientes   = [];
+let ventas     = [];
 let isLoggedIn = false;
 let editingId  = null;
 
 // ═══════════════════════════
 // HELPERS
 // ═══════════════════════════
-const cop = n => '$' + Number(n).toLocaleString('es-CO');
-const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+const cop   = n => '$' + Number(n).toLocaleString('es-CO');
+const uid   = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 const today = () => new Date().toISOString().slice(0, 10);
 
-function save() {
-  localStorage.setItem('sf_products', JSON.stringify(products));
-  localStorage.setItem('sf_clientes', JSON.stringify(clientes));
-  localStorage.setItem('sf_ventas',   JSON.stringify(ventas));
+// ── API Google Sheets ──
+async function gasGet(sheet) {
+  const r = await fetch(`${GAS_URL}?action=getAll&sheet=${sheet}`);
+  const d = await r.json();
+  return d.ok ? d.data : [];
 }
+async function gasSave(sheet, data) {
+  await fetch(GAS_URL, { method:'POST', body: JSON.stringify({action:'save', sheet, data}) });
+}
+async function gasUpdate(sheet, data) {
+  await fetch(GAS_URL, { method:'POST', body: JSON.stringify({action:'update', sheet, data}) });
+}
+async function gasDelete(sheet, id) {
+  await fetch(GAS_URL, { method:'POST', body: JSON.stringify({action:'delete', sheet, data:{id}}) });
+}
+
+// parse campos JSON que vienen como string desde Sheets
+function parseProduct(p) {
+  try { p.sizes = typeof p.sizes === 'string' ? JSON.parse(p.sizes||'[]') : (p.sizes||[]); } catch(e){ p.sizes=[]; }
+  try { p.imgs  = typeof p.imgs  === 'string' ? JSON.parse(p.imgs ||'[]') : (p.imgs ||[]); } catch(e){ p.imgs=[]; }
+  p.price     = parseFloat(p.price)     || 0;
+  p.priceOrig = parseFloat(p.priceOrig) || '';
+  return p;
+}
+function parseVenta(v) {
+  try { v.historialPagos = typeof v.historialPagos === 'string' ? JSON.parse(v.historialPagos||'[]') : (v.historialPagos||[]); } catch(e){ v.historialPagos=[]; }
+  v.total     = parseFloat(v.total)     || 0;
+  v.pagado    = parseFloat(v.pagado)    || 0;
+  v.pendiente = parseFloat(v.pendiente) || 0;
+  v.numCuotas = parseInt(v.numCuotas)   || null;
+  return v;
+}
+
+// carga inicial de datos desde Sheets
+async function loadAllData() {
+  showToast('⏳ Cargando datos...');
+  const [prods, clts, vnts] = await Promise.all([
+    gasGet('Productos'), gasGet('Clientes'), gasGet('Ventas')
+  ]);
+  products = prods.map(parseProduct);
+  clientes = clts;
+  ventas   = vnts.map(parseVenta);
+  renderGrid();
+  showToast('✅ Datos cargados');
+}
+
+function save() { /* datos se guardan directo en cada operación */ }
 
 function showToast(msg) {
   const t = document.getElementById('toast');
@@ -1180,7 +1223,7 @@ function renderAdminList() {
     </div>
   `).join('');
 }
-function saveProduct() {
+async function saveProduct() {
   const name  = document.getElementById('f-name').value.trim();
   const price = document.getElementById('f-price').value.trim();
   if (!name || !price) { showToast('⚠️ Nombre y precio son obligatorios'); return; }
@@ -1194,10 +1237,20 @@ function saveProduct() {
     badge: document.getElementById('f-badge').value,
     gender: document.getElementById('f-gender').value,
     wa: document.getElementById('f-wa').value.trim(),
+    creadoEn: today()
   };
-  if (editingId) { const idx = products.findIndex(p => p.id === editingId); products[idx] = product; showToast('✅ Producto actualizado'); }
-  else           { products.unshift(product); showToast('✅ Producto agregado'); }
-  save(); clearForm(); renderGrid(); renderAdminList();
+  showToast('⏳ Guardando...');
+  if (editingId) {
+    await gasUpdate('Productos', product);
+    const idx = products.findIndex(p => p.id === editingId);
+    products[idx] = product;
+    showToast('✅ Producto actualizado');
+  } else {
+    await gasSave('Productos', product);
+    products.unshift(product);
+    showToast('✅ Producto agregado');
+  }
+  clearForm(); renderGrid(); renderAdminList();
   document.getElementById('tab-count').textContent = products.length;
 }
 function editProduct(id) {
@@ -1218,10 +1271,12 @@ function editProduct(id) {
   renderImgPreviews();
   switchTab('add');
 }
-function deleteProduct(id) {
+async function deleteProduct(id) {
   if (!confirm('¿Eliminar este producto?')) return;
+  showToast('⏳ Eliminando...');
+  await gasDelete('Productos', id);
   products = products.filter(p => p.id !== id);
-  save(); renderGrid(); renderAdminList();
+  renderGrid(); renderAdminList();
   document.getElementById('tab-count').textContent = products.length;
   showToast('🗑️ Producto eliminado');
 }
@@ -1238,16 +1293,18 @@ function clearForm() {
 // ═══════════════════════════
 // CLIENTES
 // ═══════════════════════════
-function guardarCliente() {
+async function guardarCliente() {
   const nombre = document.getElementById('cl-nombre').value.trim();
   if (!nombre) { showToast('⚠️ El nombre es obligatorio'); return; }
-  clientes.push({
+  const cliente = {
     id: uid(), nombre,
     tel:   document.getElementById('cl-tel').value.trim(),
     notas: document.getElementById('cl-notas').value.trim(),
     fecha: today()
-  });
-  save();
+  };
+  showToast('⏳ Guardando...');
+  await gasSave('Clientes', cliente);
+  clientes.push(cliente);
   document.getElementById('cl-nombre').value = '';
   document.getElementById('cl-tel').value    = '';
   document.getElementById('cl-notas').value  = '';
@@ -1348,9 +1405,13 @@ function editarCliente(id) {
 }
 function eliminarCliente(id) {
   if (!confirm('¿Eliminar este cliente? Sus ventas también se borrarán.')) return;
+  showToast('⏳ Eliminando...');
+  await gasDelete('Clientes', id);
+  const ventasCliente = ventas.filter(v => v.clienteId === id);
+  for (const v of ventasCliente) await gasDelete('Ventas', v.id);
   clientes = clientes.filter(c => c.id !== id);
   ventas   = ventas.filter(v => v.clienteId !== id);
-  save(); renderClientes(); showToast('🗑️ Cliente eliminado');
+  renderClientes(); showToast('🗑️ Cliente eliminado');
 }
 function irAVenta(clienteId) {
   switchTab('ventas');
@@ -1424,8 +1485,9 @@ function guardarVenta() {
       : [],
     creadoEn: today()
   };
+  showToast('⏳ Guardando...');
+  await gasSave('Ventas', {...venta, historialPagos: JSON.stringify(venta.historialPagos)});
   ventas.unshift(venta);
-  save();
   // limpiar
   ['v-producto','v-total','v-obs'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('v-cliente').value    = '';
@@ -1468,7 +1530,9 @@ function confirmarAbono() {
     monto, fecha: document.getElementById('abono-fecha').value,
     nota: document.getElementById('abono-nota').value.trim() || ''
   });
-  save(); closeAbono();
+  showToast('⏳ Guardando abono...');
+  await gasUpdate('Ventas', {...v, historialPagos: JSON.stringify(v.historialPagos)});
+  closeAbono();
   showToast('✅ Abono de ' + cop(monto) + ' registrado');
   renderClientes(); renderDeudas();
 }
@@ -1551,10 +1615,12 @@ function renderDeudas() {
   }).join('');
 }
 
-function eliminarVenta(id) {
+async function eliminarVenta(id) {
   if (!confirm('¿Eliminar esta venta?')) return;
+  showToast('⏳ Eliminando...');
+  await gasDelete('Ventas', id);
   ventas = ventas.filter(v => v.id !== id);
-  save(); renderDeudas(); renderClientes(); showToast('🗑️ Venta eliminada');
+  renderDeudas(); renderClientes(); showToast('🗑️ Venta eliminada');
 }
 
 // ═══════════════════════════
@@ -1586,7 +1652,7 @@ function eliminarVenta(id) {
     </div>
   `).join('');
 })();
-renderGrid();
+loadAllData();
 </script>
 </body>
 </html>
