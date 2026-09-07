@@ -73,5 +73,20 @@
     "gender": "Hombre",
     "wa": 3136245018,
     "creadoEn": "2026-09-07T05:00:00.000Z"
+  },
+  {
+    "id": "mtrw9gzmr780",
+    "brand": "Adidas",
+    "name": "SUPERSTAR II SHOES",
+    "price": 270000,
+    "priceOrig": 320000,
+    "desc": "Celebra el audaz e icónico mundo de las zapatillas Superstar II, donde la tradición se une al estilo moderno. Inspiradas en los 90, estas zapatillas aportan una actitud fresca a tu vestuario. Diseñadas para quienes adoptan una actitud moderna, ofrecen un ajuste cómodo con un toque de rebeldía. Con la clásica puntera de goma y las franjas dentadas, su estilo distintivo es sinónimo de las Originals clásicas. Confeccionadas con una parte superior de piel de primera calidad, lucen nuestros detalles más icónicos, contrastados con elementos distintivos de la marca como la lengüeta del talón con el trébol y el logotipo Superstar.",
+    "sizes": "[\"6.5\",\"7\",\"7.5\",\"8\",\"8.5\",\"9\"]",
+    "imgs": "[\"https://assets.adidas.com/images/9759590c17184b3f81dfc6519a2af6a0_9366/KH9037_00_plp_standard.jpgKH9037_00_plp_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/b6908e6966d343e3a46bcecefb5da94a_9366/KH9037_02_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/9ad90b4e75f84fca931e98f7ad195eab_9366/KH9037_04_standard.jpg\"]",
+    "img": "https://assets.adidas.com/images/9759590c17184b3f81dfc6519a2af6a0_9366/KH9037_00_plp_standard.jpgKH9037_00_plp_standard.jpg",
+    "badge": "sale",
+    "gender": "Mujer",
+    "wa": 3136245018,
+    "creadoEn": "2026-09-07T05:00:00.000Z"
   }
 ]
