@@ -950,6 +950,7 @@
 // ═══════════════════════════
 const ADMIN_PASSWORD = 'tenis2026';
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwAIAt6E5bPdiwaBq87PV-n2EetyBmTON1g9ZPTOwQxYBlE6wVgH2prFASaAF2EFMo99g/exec';
+const PRODUCTOS_JSON = 'https://alexfullto-jpg.github.io/tenis/productos.json';
 
 // ═══════════════════════════
 // STATE
@@ -1001,16 +1002,44 @@ function parseVenta(v) {
 }
 
 // carga inicial de datos desde Sheets
+// ── Carga productos desde JSON estático de GitHub (rápido para todos) ──
+async function fetchProductosJSON() {
+  const r = await fetch(PRODUCTOS_JSON + '?t=' + Date.now());
+  if (!r.ok) throw new Error('JSON no disponible');
+  const data = await r.json();
+  return Array.isArray(data) ? data : [];
+}
+
 async function loadAllData() {
-  showToast('⏳ Cargando datos...');
-  const [prods, clts, vnts] = await Promise.all([
-    gasGet('Productos'), gasGet('Clientes'), gasGet('Ventas')
-  ]);
-  products = prods.map(parseProduct);
-  clientes = clts;
-  ventas   = vnts.map(parseVenta);
-  renderGrid();
-  showToast('✅ Datos cargados');
+  if (isLoggedIn) {
+    // Admin: carga todo desde Google Apps Script
+    showToast('⏳ Cargando datos...');
+    try {
+      const [prods, clts, vnts] = await Promise.all([
+        gasGet('Productos'), gasGet('Clientes'), gasGet('Ventas')
+      ]);
+      products = prods.map(parseProduct);
+      clientes = clts;
+      ventas   = vnts.map(parseVenta);
+      renderGrid();
+      showToast('✅ Datos cargados');
+    } catch(e) { showToast('⚠️ Error al cargar datos'); }
+    return;
+  }
+
+  // Visitante público: JSON estático (instantáneo para todos)
+  try {
+    const prods = await fetchProductosJSON();
+    products = prods.map(parseProduct);
+    renderGrid();
+  } catch(e) {
+    // Fallback: si el JSON no existe aún, carga desde GAS
+    try {
+      const prods = await gasGet('Productos');
+      products = prods.map(parseProduct);
+      renderGrid();
+    } catch(e2) { showToast('⚠️ Error al cargar productos'); }
+  }
 }
 
 function save() { /* datos se guardan directo en cada operación */ }
