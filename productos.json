@@ -103,5 +103,20 @@
     "gender": "Hombre",
     "wa": "",
     "creadoEn": "2026-09-20T05:00:00.000Z"
+  },
+  {
+    "id": "mua6njkn3a50",
+    "brand": "Adidas",
+    "name": "adidas Galaxy 7 Running Shoes (core black)",
+    "price": 241712,
+    "priceOrig": 400000,
+    "desc": "Color: core black",
+    "sizes": "[\"6.5\",\"7\",\"7.5\",\"8\",\"8.5\",\"9\",\"9.5\",\"10\",\"10.5\",\"11\",\"11.5\",\"12\",\"12.5\",\"13\",\"14\"]",
+    "imgs": "[\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/c56089c77a3a41a79e5f5e53c94c0f5e.jpg?v=1778925750&width=900\"]",
+    "img": "https://cdn.shopify.com/s/files/1/0291/4536/6588/files/c56089c77a3a41a79e5f5e53c94c0f5e.jpg?v=1778925750&width=900",
+    "badge": "sale",
+    "gender": "Hombre",
+    "wa": "",
+    "creadoEn": "2026-09-20T05:00:00.000Z"
   }
 ]
