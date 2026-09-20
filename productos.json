@@ -43,5 +43,20 @@
     "gender": "Mujer",
     "wa": "",
     "creadoEn": "2026-09-20T05:00:00.000Z"
+  },
+  {
+    "id": "mua2hwxwfbhl",
+    "brand": "Adidas",
+    "name": "adidas women Grand Court Alpha Shoes",
+    "price": 250000,
+    "priceOrig": 330000,
+    "desc": "",
+    "sizes": "[\"6.5\",\"7\",\"7.5\",\"8\",\"8.5\",\"9\"]",
+    "imgs": "[\"https://assets.adidas.com/images/32fa6542c3b349928ef0addaf69c0237_9366/JP7631_00_plp_standard.jpgJP7631_00_plp_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/012a5b6ae5904b7484a21155b4a5dae4_9366/JP7631_04_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/e7807b72b793459081a350619d7679e8_9366/JP7631_05_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/2c5247daef4d4af9a643177456b5ed1d_9366/JP7631_41_detail.jpg\"]",
+    "img": "https://assets.adidas.com/images/32fa6542c3b349928ef0addaf69c0237_9366/JP7631_00_plp_standard.jpgJP7631_00_plp_standard.jpg",
+    "badge": "sale",
+    "gender": "Mujer",
+    "wa": "",
+    "creadoEn": "2026-09-20T05:00:00.000Z"
   }
 ]
