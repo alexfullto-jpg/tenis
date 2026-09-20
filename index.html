@@ -472,6 +472,7 @@
     padding: 10px 18px; background: var(--black); color: var(--accent); border: none;
     font: 700 13px var(--font-body); cursor: pointer; border-radius: 2px; white-space: nowrap;
   }
+  .imp-btn-sm { padding: 4px 10px; margin-left: 8px; font-size: 11px; }
   .imp-status { font-size: 13px; line-height: 1.5; color: var(--gray-dark); min-height: 18px; }
   .imp-colors { display: flex; flex-wrap: wrap; gap: 8px; }
   .imp-color {
@@ -1529,7 +1530,7 @@ function clearForm() {
   document.querySelectorAll('.size-checkbox').forEach(cb => cb.checked = false);
   adminImgs = []; renderImgPreviews();
   const usd = document.getElementById('c-usd'); if (usd) { usd.value = ''; calcPrecio(); }
-  if (impData) renderImportExtras();
+  resetImport();
 }
 
 // ═══════════════════════════
@@ -1583,6 +1584,7 @@ function saveCalc() {
 // ═══════════════════════════
 const escHtml = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 let impData = null, impSel = 0;
+const imgKey = u => String(u || '').split('?')[0];
 
 function shopifyImg(u) {
   if (!u) return '';
@@ -1600,29 +1602,48 @@ function normalizeShopify(d) {
   let iColor = optNames.findIndex(n => /colou?r/i.test(n));
   if (iSize < 0 && iColor < 0 && optNames.length > 1) { iSize = 0; iColor = 1; }
   const imgs = (p.images || []).map(im => typeof im === 'string' ? im : (im && im.src)).filter(Boolean);
-  const imgById = {};
-  (p.images || []).forEach(im => { if (im && im.id) imgById[im.id] = im.src; });
+  const imgById = {}, posById = {};
+  (p.images || []).forEach(im => { if (im && im.id) { imgById[im.id] = im.src; posById[im.id] = im.position || 0; } });
 
   const groups = new Map();
   p.variants.forEach(v => {
     const color = iColor >= 0 ? String(v['option' + (iColor + 1)] || '').trim() : '';
-    if (!groups.has(color)) groups.set(color, { color, img: '', sizes: [], prices: [], availPrices: [], compare: 0 });
+    if (!groups.has(color)) groups.set(color, { color, img: '', pos: 0, sizes: [], prices: [], availPrices: [], compare: 0 });
     const g = groups.get(color);
     const size = iSize >= 0 ? String(v['option' + (iSize + 1)] || '').replace(/^US\s*/i, '').trim() : '';
     const avail = v.available !== false;
     const pr = usd(v.price), cmp = usd(v.compare_at_price);
     g.prices.push(pr); if (cmp > g.compare) g.compare = cmp;
     if (avail) { g.availPrices.push(pr); if (size && !g.sizes.includes(size)) g.sizes.push(size); }
-    if (!g.img) g.img = (v.featured_image && v.featured_image.src) || (v.image_id && imgById[v.image_id]) || '';
+    if (!g.img) {
+      const fi = v.featured_image;
+      g.img = (fi && fi.src) || (v.image_id && imgById[v.image_id]) || '';
+      g.pos = (fi && fi.position) || (v.image_id && posById[v.image_id]) || 0;
+    }
   });
   const list = [...groups.values()].map(g => {
     g.img = shopifyImg(g.img || imgs[0]);
+    if (!g.pos) { const ix = imgs.findIndex(u => imgKey(u) === imgKey(g.img)); g.pos = ix >= 0 ? ix + 1 : 0; }
     g.sizes.sort((a, b) => parseFloat(a) - parseFloat(b));
     g.soldOut = !g.availPrices.length;
     g.usd = g.soldOut ? Math.min(...g.prices) : Math.max(...g.availPrices);
     g.colorShort = [...new Set(g.color.split('/').map(x => x.trim()).filter(Boolean))].join(' / ');
     return g;
   });
+
+  // Fotos de cada color: las imágenes vienen en orden y cada color "abre" un tramo desde su foto principal.
+  const allImgs = imgs.map(shopifyImg);
+  const owned = list.filter(g => g.pos > 0).sort((a, b) => a.pos - b.pos);
+  list.forEach(g => { g.gallery = [g.img]; });
+  if (list.length === 1) {
+    list[0].gallery = [...new Map([list[0].img, ...allImgs].map(u => [imgKey(u), u])).values()];
+  } else if (owned.length) {
+    allImgs.forEach((u, i) => {
+      let owner = owned[0];
+      owned.forEach(g => { if (g.pos <= i + 1) owner = g; });
+      if (!owner.gallery.some(x => imgKey(x) === imgKey(u))) owner.gallery.push(u);
+    });
+  }
 
   const title = String(p.title || '').trim();
   let gender = /^\s*(men'?s|mens)\b/i.test(title) ? 'Hombre'
@@ -1680,13 +1701,22 @@ function renderImportColors() {
 function renderImportExtras() {
   const box = document.getElementById('imp-extra');
   if (!impData) { box.innerHTML = ''; return; }
-  const key = u => String(u).split('?')[0];
-  const skip = new Set([...impData.groups.filter((_, i) => i !== impSel).map(g => key(g.img)), ...adminImgs.map(key)]);
-  const extras = impData.images.filter(u => !skip.has(key(u)));
+  const have = new Set(adminImgs.map(imgKey));
+  const extras = impData.images.filter(u => !have.has(imgKey(u)));
   box.innerHTML = extras.length
-    ? `<div class="imp-extra-title">Más fotos del modelo (toca para agregar)</div>
+    ? `<div class="imp-extra-title">Otras fotos del modelo (pueden ser de otro color)
+         <button type="button" class="imp-btn imp-btn-sm" data-all="1">Agregar todas</button></div>
        <div class="imp-extra-list">${extras.map(u => `<button type="button" class="imp-thumb" data-u="${escHtml(u)}"><img src="${escHtml(u)}" alt="" loading="lazy"></button>`).join('')}</div>`
     : '';
+}
+function resetImport() {
+  impData = null; impSel = 0;
+  document.getElementById('imp-url').value = '';
+  document.getElementById('imp-status').textContent = '';
+  document.getElementById('imp-colors').innerHTML = '';
+  document.getElementById('imp-extra').innerHTML = '';
+  document.getElementById('imp-json').value = '';
+  document.getElementById('imp-manual').style.display = 'none';
 }
 
 function selectImportColor(i) {
@@ -1699,15 +1729,15 @@ function selectImportColor(i) {
   set('f-desc', g.colorShort ? 'Color: ' + g.colorShort : '');
   document.querySelectorAll('.size-checkbox').forEach(cb => { cb.checked = false; });
   g.sizes.forEach(sz => { ensureSizeChip(sz).checked = true; });
-  adminImgs = [g.img].filter(Boolean); renderImgPreviews();
+  adminImgs = g.gallery.slice(0, 6); renderImgPreviews();
   if (g.compare > g.usd) set('f-badge', 'sale');
   set('c-usd', g.usd.toFixed(2)); calcPrecio();
   if (calcResult != null) set('f-price', calcResult);
   renderImportColors(); renderImportExtras();
   const st = document.getElementById('imp-status');
   if (g.soldOut)               st.textContent = '⚠️ Ese color está agotado en el proveedor.';
-  else if (calcResult == null) st.textContent = '✅ Datos cargados. Falta la TRM: escríbela en la calculadora y toca "Usar como precio de venta".';
-  else                         st.textContent = `✅ Listo: ${g.sizes.length} tallas disponibles y precio ${cop(calcResult)}. Revisa y toca "Guardar producto".`;
+  else if (calcResult == null) st.textContent = `✅ Datos cargados (${g.sizes.length} tallas, ${adminImgs.length} ${adminImgs.length === 1 ? 'foto' : 'fotos'}). Falta la TRM: escríbela en la calculadora y toca "Usar como precio de venta".`;
+  else                         st.textContent = `✅ Listo: ${g.sizes.length} tallas, ${adminImgs.length} ${adminImgs.length === 1 ? 'foto' : 'fotos'} y precio ${cop(calcResult)}. Revisa y toca "Guardar producto".`;
 }
 
 function applyImport(data) {
@@ -1715,7 +1745,10 @@ function applyImport(data) {
   document.getElementById('imp-manual').style.display = 'none';
   // color con más tallas disponibles primero
   let best = 0;
-  impData.groups.forEach((g, i) => { if (g.sizes.length > impData.groups[best].sizes.length) best = i; });
+  impData.groups.forEach((g, i) => {
+    const b = impData.groups[best];
+    if (g.sizes.length > b.sizes.length || (g.sizes.length === b.sizes.length && g.gallery.length > b.gallery.length)) best = i;
+  });
   selectImportColor(best);
   if (impData.groups.length > 1) {
     const st = document.getElementById('imp-status');
@@ -1753,6 +1786,12 @@ function importFromPastedText() {
     const b = e.target.closest('.imp-color'); if (b && impData) selectImportColor(parseInt(b.dataset.i));
   });
   document.getElementById('imp-extra').addEventListener('click', e => {
+    if (e.target.closest('[data-all]')) {
+      const have = new Set(adminImgs.map(imgKey));
+      impData.images.forEach(u => { if (adminImgs.length < 6 && !have.has(imgKey(u))) { adminImgs.push(u); have.add(imgKey(u)); } });
+      if (impData.images.some(u => !have.has(imgKey(u)))) showToast('⚠️ Máximo 6 fotos');
+      renderImgPreviews(); renderImportExtras(); return;
+    }
     const t = e.target.closest('[data-u]'); if (!t) return;
     if (adminImgs.length >= 6) { showToast('⚠️ Máximo 6 fotos'); return; }
     if (!adminImgs.includes(t.dataset.u)) { adminImgs.push(t.dataset.u); renderImgPreviews(); renderImportExtras(); }
