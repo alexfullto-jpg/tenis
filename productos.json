@@ -118,5 +118,20 @@
     "gender": "Hombre",
     "wa": "",
     "creadoEn": "2026-09-20T05:00:00.000Z"
+  },
+  {
+    "id": "mua6ql2buena",
+    "brand": "Otra",
+    "name": "adidas Daily 4.0 Shoes (core black / carbon / gum)",
+    "price": 241712,
+    "priceOrig": 380000,
+    "desc": "Color: core black / carbon / gum",
+    "sizes": "[\"6\",\"6.5\",\"7\",\"7.5\",\"8\",\"8.5\",\"9\",\"9.5\",\"10\",\"10.5\",\"11\",\"11.5\",\"12\",\"12.5\",\"13\",\"14\",\"5\"]",
+    "imgs": "[\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/c8cd22f0b2ab47349af25ded3969a47d.jpg?v=1781290694&width=900\"]",
+    "img": "https://cdn.shopify.com/s/files/1/0291/4536/6588/files/c8cd22f0b2ab47349af25ded3969a47d.jpg?v=1781290694&width=900",
+    "badge": "sale",
+    "gender": "Hombre",
+    "wa": "",
+    "creadoEn": "2026-09-20T05:00:00.000Z"
   }
 ]
