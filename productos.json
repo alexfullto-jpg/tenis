@@ -133,5 +133,20 @@
     "gender": "Hombre",
     "wa": "",
     "creadoEn": "2026-09-20T05:00:00.000Z"
+  },
+  {
+    "id": "mua764vchztt",
+    "brand": "Otra",
+    "name": "adidas Grand Court Shoes (core black / cloud white / gold metallic)",
+    "price": 241712,
+    "priceOrig": 400000,
+    "desc": "Color: core black / cloud white / gold metallic",
+    "sizes": "[\"10.5\",\"11\",\"11.5\",\"12\",\"12.5\",\"13\",\"14\"]",
+    "imgs": "[\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/1fd4e80083bf4c689f979c945311d058.jpg?v=1763435301&width=900\",\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/75639fab1ded42e3b476a6f4d29f32af.jpg?v=1749903406&width=900\",\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/96f1ccea52a0408f8a5c7e434db70334.jpg?v=1749903406&width=900\",\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/2f50641de61148df86ec1c2cb085ee89.jpg?v=1749903406&width=900\",\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/e8bb271537ce4c7b90ee040518e8f97e.jpg?v=1749903406&width=900\",\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/f9606bff8c7148a79b33e62f6d82b1d9.jpg?v=1749903406&width=900\"]",
+    "img": "https://cdn.shopify.com/s/files/1/0291/4536/6588/files/1fd4e80083bf4c689f979c945311d058.jpg?v=1763435301&width=900",
+    "badge": "sale",
+    "gender": "Hombre",
+    "wa": "",
+    "creadoEn": "2026-09-20T05:00:00.000Z"
   }
 ]
