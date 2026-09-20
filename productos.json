@@ -148,5 +148,20 @@
     "gender": "Hombre",
     "wa": "",
     "creadoEn": "2026-09-20T05:00:00.000Z"
+  },
+  {
+    "id": "muaewrjbl3lm",
+    "brand": "Otra",
+    "name": "adidas RUN 70s 2.0 Shoes (grey one / grey three / core black)",
+    "price": 238074,
+    "priceOrig": 390000,
+    "desc": "Color: grey one / grey three / core black",
+    "sizes": "[\"7.5\",\"8\",\"8.5\",\"9\",\"9.5\",\"10\",\"10.5\",\"11\",\"11.5\",\"12\",\"13\"]",
+    "imgs": "[\"https://cdn.shopify.com/s/files/1/0291/4536/6588/files/7871bbb6f76e4dde8bdb02070aa4f5d3.jpg?v=1778926334&width=900\"]",
+    "img": "https://cdn.shopify.com/s/files/1/0291/4536/6588/files/7871bbb6f76e4dde8bdb02070aa4f5d3.jpg?v=1778926334&width=900",
+    "badge": "sale",
+    "gender": "Hombre",
+    "wa": "",
+    "creadoEn": "2026-09-20T05:00:00.000Z"
   }
 ]
