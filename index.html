@@ -425,6 +425,91 @@
     font-size: 11px; font-weight: 600; border-radius: 2px; background: var(--white);
   }
 
+  /* ── FILTROS DEL CATÁLOGO ── */
+  .filters { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px 28px; margin-bottom: 20px; }
+  .filter-block { display: flex; flex-direction: column; gap: 6px; }
+  .filter-label { font-size: 12px; font-weight: 600; color: var(--gray-dark); }
+  .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip {
+    padding: 9px 16px; border: 1.5px solid var(--black); background: transparent;
+    font: 600 13px var(--font-body); cursor: pointer; border-radius: 2px; color: var(--black);
+  }
+  .chip.active { background: var(--black); color: var(--accent); }
+  .filter-size select {
+    padding: 9px 12px; border: 1.5px solid var(--black); background: var(--white);
+    font: 600 13px var(--font-body); border-radius: 2px; min-width: 120px;
+  }
+  .filter-share {
+    margin-left: auto; padding: 9px 14px; border: 1.5px solid var(--gray-light); background: var(--white);
+    font: 600 12px var(--font-body); cursor: pointer; border-radius: 2px; color: var(--gray-dark);
+  }
+  .chip:focus-visible, .filter-size select:focus-visible, .filter-share:focus-visible, button.size-pill:focus-visible {
+    outline: 2px solid var(--black); outline-offset: 2px;
+  }
+  .filter-count { font-size: 13px; color: var(--gray-dark); margin-bottom: 16px; min-height: 18px; }
+  .size-pill.sel { background: var(--black); color: var(--accent); border-color: var(--black); }
+  button.size-pill { cursor: pointer; font-family: var(--font-body); }
+  .detail-note { font-size: 12px; color: var(--gray-mid); margin-top: 10px; line-height: 1.5; }
+  .empty-cta {
+    display: inline-block; margin-top: 18px; padding: 14px 28px; background: var(--black); color: var(--accent);
+    font-weight: 700; font-size: 13px; text-decoration: none; border-radius: 2px;
+  }
+
+  /* ── IMPORTAR DESDE LINK (admin) ── */
+  .import-box {
+    grid-column: 1 / -1; border: 1.5px solid var(--black); padding: 16px; background: var(--white);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .import-box h4 { font-size: 14px; font-weight: 700; }
+  .import-box small { font-size: 12px; color: var(--gray-mid); line-height: 1.5; }
+  .imp-row { display: flex; gap: 8px; }
+  .imp-row input {
+    flex: 1; min-width: 0; padding: 10px 12px; border: 1.5px solid var(--gray-light);
+    border-radius: 4px; font: 14px var(--font-body);
+  }
+  .imp-row input:focus { outline: none; border-color: var(--black); }
+  .imp-btn {
+    padding: 10px 18px; background: var(--black); color: var(--accent); border: none;
+    font: 700 13px var(--font-body); cursor: pointer; border-radius: 2px; white-space: nowrap;
+  }
+  .imp-status { font-size: 13px; line-height: 1.5; color: var(--gray-dark); min-height: 18px; }
+  .imp-colors { display: flex; flex-wrap: wrap; gap: 8px; }
+  .imp-color {
+    display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; text-align: left;
+    border: 1.5px solid var(--gray-light); background: var(--white); cursor: pointer;
+    font-family: var(--font-body); border-radius: 2px;
+  }
+  .imp-color img { width: 52px; height: 52px; object-fit: cover; background: var(--card-bg); }
+  .imp-color span { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+  .imp-color small { font-size: 11px; color: var(--gray-mid); }
+  .imp-color.sel { border-color: var(--black); background: var(--off-white); }
+  .imp-color.out { opacity: .55; }
+  .imp-extra-title { font-size: 12px; font-weight: 600; color: var(--gray-dark); margin-bottom: 6px; }
+  .imp-extra-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .imp-thumb { width: 64px; height: 64px; padding: 0; border: 1.5px solid var(--gray-light); background: var(--card-bg); cursor: pointer; }
+  .imp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  #imp-manual { display: none; flex-direction: column; gap: 8px; }
+  #imp-manual textarea { width: 100%; min-height: 90px; padding: 10px; border: 1.5px solid var(--gray-light); font: 12px monospace; border-radius: 4px; }
+  .imp-btn:focus-visible, .imp-color:focus-visible, .imp-thumb:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; }
+
+  /* ── CALCULADORA DE PRECIO (admin) ── */
+  .calc-box {
+    grid-column: 1 / -1; border: 1.5px dashed var(--gray-mid); padding: 16px; background: var(--off-white);
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .calc-box h4 { grid-column: 1 / -1; font-size: 14px; font-weight: 700; }
+  .calc-box small { grid-column: 1 / -1; font-size: 12px; color: var(--gray-mid); margin-top: -6px; }
+  .calc-out { grid-column: 1 / -1; font-size: 13px; line-height: 1.7; color: var(--gray-dark); }
+  .calc-apply {
+    grid-column: 1 / -1; padding: 12px; background: var(--black); color: var(--accent);
+    border: none; font: 700 13px var(--font-body); cursor: pointer; border-radius: 2px;
+  }
+  .calc-apply:disabled { opacity: .35; cursor: not-allowed; }
+  @media (max-width: 768px) {
+    .calc-box { grid-template-columns: 1fr 1fr; }
+    .filter-share { margin-left: 0; }
+  }
+
   /* toast */
   .toast {
     position: fixed; bottom: 32px; right: 32px; z-index: 2000;
@@ -591,7 +676,7 @@
   <div class="nav-links">
     <a href="#promo">Promociones</a>
     <a href="#catalog">Catálogo</a>
-    <a href="https://wa.me/573000000000" target="_blank">WhatsApp</a>
+    <a data-wa href="https://wa.me/573000000000" target="_blank">WhatsApp</a>
   </div>
   <button class="nav-admin-btn" onclick="openAdmin()">Admin ↗</button>
 </nav>
@@ -611,7 +696,7 @@
     <img class="hero-shoe-img" src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=700&q=80&fit=crop" alt="Tenis" onerror="this.style.display='none'">
     <div class="hero-badge">
       <strong id="hero-count">0</strong>
-      pares disponibles hoy
+      modelos en promo hoy
     </div>
   </div>
 </section>
@@ -642,6 +727,23 @@
     <h2 class="section-title">PROMOCIONES<br>DE HOY</h2>
     <p class="section-subtitle">Precios actualizados constantemente. Escríbenos antes de que se agoten.</p>
   </div>
+  <div class="filters" id="filters">
+    <div class="filter-block">
+      <span class="filter-label">Para quién</span>
+      <div class="filter-chips" id="gender-chips">
+        <button type="button" class="chip" data-g="">Todos</button>
+        <button type="button" class="chip" data-g="Mujer">Mujer</button>
+        <button type="button" class="chip" data-g="Hombre">Hombre</button>
+        <button type="button" class="chip" data-g="Unisex">Unisex</button>
+      </div>
+    </div>
+    <div class="filter-block filter-size">
+      <label class="filter-label" for="flt-size">Mi talla</label>
+      <select id="flt-size"><option value="">Todas</option></select>
+    </div>
+    <button type="button" class="filter-share" id="flt-share">Copiar link de esta búsqueda</button>
+  </div>
+  <div class="filter-count" id="filter-count" aria-live="polite"></div>
   <div class="products-grid" id="products-grid"></div>
 </section>
 
@@ -649,7 +751,7 @@
 <footer>
   <div class="footer-brand">SOLEFINDER</div>
   <span>© 2025 · Tenis originales en Colombia · Hecho con 🖤</span>
-  <a href="https://wa.me/573000000000" style="color: var(--accent); text-decoration: none; font-size: 13px;" target="_blank">💬 WhatsApp</a>
+  <a data-wa href="https://wa.me/573000000000" style="color: var(--accent); text-decoration: none; font-size: 13px;" target="_blank">💬 WhatsApp</a>
 </footer>
 
 <!-- TOAST -->
@@ -692,6 +794,24 @@
         <div class="product-form" id="product-form">
           <input type="hidden" id="edit-id" value="">
 
+          <div class="import-box" id="import-box">
+            <h4>Importar desde un link</h4>
+            <small>Pega el link del producto en Shop Simon: se llenan solos el nombre, las tallas disponibles, las fotos y el precio.</small>
+            <div class="imp-row">
+              <input type="url" id="imp-url" placeholder="https://shop.simon.com/products/..." autocomplete="off">
+              <button type="button" class="imp-btn" id="imp-go">Traer datos</button>
+            </div>
+            <div class="imp-status" id="imp-status" aria-live="polite"></div>
+            <div id="imp-manual">
+              <small>Abre el enlace de abajo, copia todo el texto que aparece y pégalo aquí:</small>
+              <a id="imp-manual-link" href="#" target="_blank" rel="noopener">Abrir datos del producto</a>
+              <textarea id="imp-json" placeholder='Pega aquí el texto (empieza con {"id":...)'></textarea>
+              <button type="button" class="imp-btn" id="imp-manual-go">Usar este texto</button>
+            </div>
+            <div class="imp-colors" id="imp-colors"></div>
+            <div id="imp-extra"></div>
+          </div>
+
           <div class="form-group">
             <label>Marca</label>
             <select id="f-brand">
@@ -707,6 +827,21 @@
           <div class="form-group">
             <label>Nombre del modelo</label>
             <input type="text" id="f-name" placeholder="Ej: Supernova Rise 2">
+          </div>
+
+          <div class="calc-box" id="calc-box">
+            <h4>Calculadora de precio</h4>
+            <small>Solo te ayuda a calcular. El costo en USD no se guarda ni se publica.</small>
+            <div class="form-group"><label>Precio del proveedor (USD)</label><input type="number" id="c-usd" step="0.01" placeholder="Ej: 35"></div>
+            <div class="form-group"><label>Tax en EE.UU. (%)</label><input type="number" id="c-tax" step="0.01"></div>
+            <div class="form-group"><label>Casillero (USD)</label><input type="number" id="c-ship" step="0.01"></div>
+            <div class="form-group"><label>TRM (COP por USD)</label><input type="number" id="c-trm" step="0.01" placeholder="Ej: 4000"></div>
+            <div class="form-group"><label>Ganancia (COP)</label><input type="number" id="c-margin" step="1000"></div>
+            <div class="form-group"><label>Redondear hacia arriba a</label>
+              <select id="c-round"><option value="1">Sin redondeo</option><option value="1000">1.000</option><option value="10000">10.000</option></select>
+            </div>
+            <div class="calc-out" id="calc-out"></div>
+            <button type="button" class="calc-apply" id="calc-apply" disabled>Usar como precio de venta</button>
           </div>
 
           <div class="form-group">
@@ -949,6 +1084,11 @@
 // CONFIG
 // ═══════════════════════════
 const ADMIN_PASSWORD = 'tenis2026';
+// ⚠️ CAMBIA por tu número de WhatsApp: código de país + número, sin + ni espacios (Colombia: 57...)
+const WA_NUMBER = '573000000000';
+const waBase = () => 'https://wa.me/' + WA_NUMBER;
+// Opcional: URL de tu propio Cloudflare Worker para leer productos del proveedor (ver worker-proxy.js).
+const IMPORT_PROXY = '';
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwAIAt6E5bPdiwaBq87PV-n2EetyBmTON1g9ZPTOwQxYBlE6wVgH2prFASaAF2EFMo99g/exec';
 const PRODUCTOS_JSON = 'https://alexfullto-jpg.github.io/tenis/productos.json';
 
@@ -1054,12 +1194,69 @@ function showToast(msg) {
 // ═══════════════════════════
 // PUBLIC GRID
 // ═══════════════════════════
+// ── Filtros (género y talla). Se leen/escriben en el link: ?genero=mujer&talla=7 ──
+let flt = { gender: '', size: '' };
+(function readFiltersFromURL() {
+  const q = new URLSearchParams(location.search);
+  flt.gender = { mujer: 'Mujer', hombre: 'Hombre', unisex: 'Unisex' }[(q.get('genero') || '').toLowerCase()] || '';
+  flt.size   = q.get('talla') || '';
+})();
+function writeFiltersToURL() {
+  const q = new URLSearchParams();
+  if (flt.gender) q.set('genero', flt.gender.toLowerCase());
+  if (flt.size)   q.set('talla', flt.size);
+  const qs = q.toString();
+  try { history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash); } catch (e) {}
+}
+function sizeList() {
+  const set = new Set();
+  products.forEach(p => (Array.isArray(p.sizes) ? p.sizes : []).forEach(s => set.add(String(s))));
+  if (flt.size) set.add(flt.size);
+  return [...set].sort((a, b) => parseFloat(a) - parseFloat(b));
+}
+function syncFilterUI() {
+  const sel = document.getElementById('flt-size');
+  sel.innerHTML = '<option value="">Todas</option>' +
+    sizeList().map(s => `<option value="${s}"${s === flt.size ? ' selected' : ''}>${s}</option>`).join('');
+  document.querySelectorAll('#gender-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.g === flt.gender));
+}
+function filteredProducts() {
+  return products.filter(p => {
+    const pg = p.gender || 'Unisex';
+    if (flt.gender === 'Unisex' && pg !== 'Unisex') return false;
+    if (flt.gender && flt.gender !== 'Unisex' && pg !== flt.gender && pg !== 'Unisex') return false;
+    if (flt.size) {
+      const arr = (Array.isArray(p.sizes) ? p.sizes : []).map(String);
+      if (!arr.includes(flt.size)) return false;
+    }
+    return true;
+  });
+}
+
 function renderGrid() {
   const grid  = document.getElementById('products-grid');
   const count = products.length;
   document.getElementById('stat-products').textContent = count;
   document.getElementById('hero-count').textContent    = count;
   document.getElementById('tab-count').textContent     = count;
+  syncFilterUI();
+  const list = filteredProducts();
+  const hasFilter = !!(flt.gender || flt.size);
+  document.getElementById('filter-count').textContent =
+    hasFilter && count ? `${list.length} de ${count} modelos` : '';
+
+  if (count > 0 && list.length === 0) {
+    const what = ['tenis', flt.gender ? flt.gender.toLowerCase() : '', flt.size ? 'talla ' + flt.size : ''].filter(Boolean).join(' ');
+    const msg = encodeURIComponent(`Hola! Busco ${what}. ¿Me ayudas a conseguirlos?`);
+    grid.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">👟</div>
+        <h3>No tenemos ese modelo publicado</h3>
+        <p>Cuéntanos qué buscas y te lo conseguimos.</p>
+        <a class="empty-cta" href="${waBase()}?text=${msg}" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+      </div>`;
+    return;
+  }
 
   if (count === 0) {
     grid.innerHTML = `
@@ -1070,10 +1267,10 @@ function renderGrid() {
       </div>`;
     return;
   }
-  grid.innerHTML = products.map(p => {
+  grid.innerHTML = list.map(p => {
     const sizesArr = Array.isArray(p.sizes) ? p.sizes : [];
     const pillsHtml = sizesArr.length
-      ? `<div class="sizes-pills">${sizesArr.map(s=>`<span class="size-pill">${s}</span>`).join('')}</div>` : '';
+      ? `<div class="sizes-pills">${sizesArr.map(s=>`<span class="size-pill${String(s)===flt.size?' sel':''}">${s}</span>`).join('')}</div>` : '';
     return `
     <div class="product-card" onclick="openDetail('${p.id}')">
       <div class="card-badges">
@@ -1133,6 +1330,15 @@ function removeImg(i) { adminImgs.splice(i, 1); renderImgPreviews(); }
 // PRODUCT DETAIL
 // ═══════════════════════════
 let galleryImgs = [], galleryIdx = 0;
+let detailProduct = null, detailSize = '';
+function renderDetailSizes() {
+  const arr = Array.isArray(detailProduct && detailProduct.sizes) ? detailProduct.sizes : [];
+  document.getElementById('detail-sizes').innerHTML = arr.length
+    ? `<strong style="display:block;margin-bottom:8px;font-size:13px;">Elige tu talla</strong>
+       <div class="sizes-pills">${arr.map(s => `<button type="button" class="size-pill${String(s) === detailSize ? ' sel' : ''}" onclick="pickSize('${s}')">${s}</button>`).join('')}</div>
+       <p class="detail-note">Confirmamos la disponibilidad de tu talla por WhatsApp antes de tu pedido.</p>` : '';
+}
+function pickSize(s) { detailSize = (detailSize === String(s)) ? '' : String(s); renderDetailSizes(); }
 function openDetail(id) {
   const p = products.find(x => x.id === id);
   if (!p) return;
@@ -1146,16 +1352,20 @@ function openDetail(id) {
   document.getElementById('detail-desc').textContent  = p.desc || 'Consulta disponibilidad por WhatsApp.';
   document.getElementById('detail-price').textContent = cop(p.price) + ' COP';
   document.getElementById('detail-price-orig').textContent = p.priceOrig ? cop(p.priceOrig) + ' COP' : '';
-  const sizesArr = Array.isArray(p.sizes) ? p.sizes : [];
-  const sizesEl  = document.getElementById('detail-sizes');
-  sizesEl.innerHTML = sizesArr.length
-    ? `<strong style="display:block;margin-bottom:8px;font-size:12px;text-transform:uppercase;letter-spacing:1px;">Tallas disponibles</strong>
-       <div class="sizes-pills">${sizesArr.map(s=>`<span class="size-pill">${s}</span>`).join('')}</div>` : '';
+  detailProduct = p;
+  const sizesArr = (Array.isArray(p.sizes) ? p.sizes : []).map(String);
+  detailSize = sizesArr.includes(flt.size) ? flt.size : '';
+  renderDetailSizes();
   galleryImgs = Array.isArray(p.imgs) && p.imgs.length ? p.imgs : (p.img ? [p.img] : []);
   galleryIdx  = 0;
   renderGallery();
-  const waLink = p.wa || `https://wa.me/573000000000?text=Hola!%20Vi%20los%20${encodeURIComponent(p.brand)}%20${encodeURIComponent(p.name)}%20en%20${p.price}%20y%20quiero%20m%C3%A1s%20info`;
-  document.getElementById('detail-cta').onclick = () => window.open(waLink, '_blank');
+  document.getElementById('detail-cta').onclick = () => {
+    if (p.wa) { window.open(p.wa, '_blank'); return; }
+    const title = p.name.toLowerCase().startsWith((p.brand || '').toLowerCase()) ? p.name : `${p.brand} ${p.name}`;
+    const msg = `Hola! Me interesa el ${title} (${cop(p.price)})` +
+                (detailSize ? ` en talla ${detailSize}` : '') + `. ¿Me confirmas disponibilidad?`;
+    window.open(waBase() + '?text=' + encodeURIComponent(msg), '_blank');
+  };
   document.getElementById('detail-overlay').classList.add('open');
 }
 function renderGallery() {
@@ -1318,7 +1528,236 @@ function clearForm() {
   document.getElementById('f-gender').value = 'Hombre';
   document.querySelectorAll('.size-checkbox').forEach(cb => cb.checked = false);
   adminImgs = []; renderImgPreviews();
+  const usd = document.getElementById('c-usd'); if (usd) { usd.value = ''; calcPrecio(); }
+  if (impData) renderImportExtras();
 }
+
+// ═══════════════════════════
+// CALCULADORA DE PRECIO
+// precio = (USD × (1 + tax) + casillero) × TRM + ganancia
+// ═══════════════════════════
+const CALC_KEY = 'sf_calc_v1';
+const CALC_DEFAULTS = { tax: '7', ship: '16', trm: '', margin: '100000', round: '10000' };
+let calcResult = null;
+function calcPrecio() {
+  const v = id => parseFloat(document.getElementById(id).value);
+  const usd = v('c-usd'), trm = v('c-trm');
+  const tax = v('c-tax') || 0, ship = v('c-ship') || 0, margin = v('c-margin') || 0;
+  const step = parseInt(document.getElementById('c-round').value) || 1;
+  const out = document.getElementById('calc-out'), btn = document.getElementById('calc-apply');
+  if (!usd || !trm) {
+    calcResult = null; btn.disabled = true;
+    out.textContent = !trm ? 'Escribe la TRM de hoy para calcular.' : 'Escribe el precio del proveedor en USD.';
+    return;
+  }
+  const costUSD = usd * (1 + tax / 100) + ship;
+  const costCOP = Math.round(costUSD * trm);
+  let total = costCOP + margin;
+  total = step > 1 ? Math.ceil(total / step) * step : Math.round(total);
+  calcResult = total; btn.disabled = false;
+  out.innerHTML = `Costo: US$${(usd * (1 + tax / 100)).toFixed(2)} con tax + US$${ship.toFixed(2)} casillero = US$${costUSD.toFixed(2)} ≈ ${cop(costCOP)}<br>
+    Ganancia real: ${cop(total - costCOP)} · <strong>Precio de venta: ${cop(total)}</strong>`;
+}
+function saveCalc() {
+  const o = {}; ['tax', 'ship', 'trm', 'margin', 'round'].forEach(k => o[k] = document.getElementById('c-' + k).value);
+  try { localStorage.setItem(CALC_KEY, JSON.stringify(o)); } catch (e) {}
+}
+(function initCalc() {
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(CALC_KEY) || '{}'); } catch (e) {}
+  const vals = { ...CALC_DEFAULTS, ...saved };
+  ['tax', 'ship', 'trm', 'margin', 'round'].forEach(k => document.getElementById('c-' + k).value = vals[k]);
+  ['c-usd', 'c-tax', 'c-ship', 'c-trm', 'c-margin', 'c-round'].forEach(id =>
+    document.getElementById(id).addEventListener('input', () => { saveCalc(); calcPrecio(); }));
+  document.getElementById('calc-apply').addEventListener('click', () => {
+    if (calcResult == null) return;
+    document.getElementById('f-price').value = calcResult;
+    showToast('✅ Precio aplicado: ' + cop(calcResult));
+  });
+  calcPrecio();
+})();
+
+// ═══════════════════════════
+// IMPORTAR DESDE LINK (tiendas Shopify, como Shop Simon)
+// Lee <link>/products/<producto>.js y llena el formulario.
+// ═══════════════════════════
+const escHtml = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+let impData = null, impSel = 0;
+
+function shopifyImg(u) {
+  if (!u) return '';
+  u = String(u).trim();
+  if (u.startsWith('//')) u = 'https:' + u;
+  if (!/[?&]width=/.test(u)) u += (u.includes('?') ? '&' : '?') + 'width=900';
+  return u;
+}
+function normalizeShopify(d) {
+  const p = d && d.product ? d.product : d;
+  if (!p || !Array.isArray(p.variants) || !p.variants.length) throw new Error('No encontré datos de producto en ese texto.');
+  const usd = v => typeof v === 'number' ? v / 100 : (parseFloat(v) || 0);
+  const optNames = (p.options || []).map(o => typeof o === 'string' ? o : ((o && o.name) || ''));
+  let iSize  = optNames.findIndex(n => /size|talla/i.test(n));
+  let iColor = optNames.findIndex(n => /colou?r/i.test(n));
+  if (iSize < 0 && iColor < 0 && optNames.length > 1) { iSize = 0; iColor = 1; }
+  const imgs = (p.images || []).map(im => typeof im === 'string' ? im : (im && im.src)).filter(Boolean);
+  const imgById = {};
+  (p.images || []).forEach(im => { if (im && im.id) imgById[im.id] = im.src; });
+
+  const groups = new Map();
+  p.variants.forEach(v => {
+    const color = iColor >= 0 ? String(v['option' + (iColor + 1)] || '').trim() : '';
+    if (!groups.has(color)) groups.set(color, { color, img: '', sizes: [], prices: [], availPrices: [], compare: 0 });
+    const g = groups.get(color);
+    const size = iSize >= 0 ? String(v['option' + (iSize + 1)] || '').replace(/^US\s*/i, '').trim() : '';
+    const avail = v.available !== false;
+    const pr = usd(v.price), cmp = usd(v.compare_at_price);
+    g.prices.push(pr); if (cmp > g.compare) g.compare = cmp;
+    if (avail) { g.availPrices.push(pr); if (size && !g.sizes.includes(size)) g.sizes.push(size); }
+    if (!g.img) g.img = (v.featured_image && v.featured_image.src) || (v.image_id && imgById[v.image_id]) || '';
+  });
+  const list = [...groups.values()].map(g => {
+    g.img = shopifyImg(g.img || imgs[0]);
+    g.sizes.sort((a, b) => parseFloat(a) - parseFloat(b));
+    g.soldOut = !g.availPrices.length;
+    g.usd = g.soldOut ? Math.min(...g.prices) : Math.max(...g.availPrices);
+    g.colorShort = [...new Set(g.color.split('/').map(x => x.trim()).filter(Boolean))].join(' / ');
+    return g;
+  });
+
+  const title = String(p.title || '').trim();
+  let gender = /^\s*(men'?s|mens)\b/i.test(title) ? 'Hombre'
+             : /^\s*(women'?s|womens)\b/i.test(title) ? 'Mujer'
+             : /unisex/i.test(title) ? 'Unisex' : '';
+  if (!gender) {
+    const sn = optNames[iSize] || '';
+    gender = /women/i.test(sn) ? 'Mujer' : /\bmen\b/i.test(sn) ? 'Hombre' : '';
+  }
+  const vendor = String(p.vendor || '').trim();
+  let model = title.replace(/^\s*(men'?s|women'?s|unisex|kids'?|boys'?|girls'?)\s+/i, '');
+  if (vendor && model.toLowerCase().startsWith(vendor.toLowerCase())) model = model.slice(vendor.length).trim();
+  const brand = ['Adidas', 'Puma', 'Reebok', 'Nike', 'New Balance'].find(b => b.toLowerCase() === vendor.toLowerCase()) || 'Otra';
+  return { model, brand, gender, groups: list, images: imgs.map(shopifyImg) };
+}
+
+async function fetchShopifyProduct(link) {
+  let u; try { u = new URL(link); } catch (e) { throw new Error('Ese link no es válido.'); }
+  const m = u.pathname.match(/\/products\/([^\/?#]+)/);
+  if (!m) throw new Error('Ese link no parece de un producto (debe incluir /products/...).');
+  const target = `${u.origin}/products/${m[1]}.js`;
+  const attempts = [target];
+  if (IMPORT_PROXY) attempts.push(IMPORT_PROXY + (IMPORT_PROXY.includes('?') ? '&' : '?') + 'url=' + encodeURIComponent(target));
+  attempts.push('https://api.allorigins.win/raw?url=' + encodeURIComponent(target));
+  for (const url of attempts) {
+    try {
+      const r = await fetch(url);
+      if (r.status === 404 && url === target) throw new Error('Ese producto ya no existe en la tienda.');
+      if (!r.ok) continue;
+      return JSON.parse(await r.text());
+    } catch (e) { if (/ya no existe/.test(e.message)) throw e; }
+  }
+  const err = new Error('MANUAL'); err.target = target; throw err;
+}
+
+function ensureSizeChip(t) {
+  let cb = [...document.querySelectorAll('.size-checkbox')].find(x => x.value === t);
+  if (cb) return cb;
+  const id = 'sz-' + t.replace(/[^a-zA-Z0-9.]/g, '_');
+  const div = document.createElement('div');
+  div.className = 'size-chip';
+  div.innerHTML = `<input type="checkbox" class="size-checkbox" id="${id}" value="${escHtml(t)}"><label for="${id}">${escHtml(t)}</label>`;
+  document.getElementById('sizes-grid').appendChild(div);
+  return div.firstChild;
+}
+
+function renderImportColors() {
+  document.getElementById('imp-colors').innerHTML = impData.groups.map((g, i) => `
+    <button type="button" class="imp-color${i === impSel ? ' sel' : ''}${g.soldOut ? ' out' : ''}" data-i="${i}">
+      <img src="${escHtml(g.img)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+      <span><strong>${escHtml(g.colorShort || 'Único color')}</strong>
+      <small>${g.soldOut ? 'Agotado' : g.sizes.length + ' tallas · US$' + g.usd.toFixed(2)}</small></span>
+    </button>`).join('');
+}
+function renderImportExtras() {
+  const box = document.getElementById('imp-extra');
+  if (!impData) { box.innerHTML = ''; return; }
+  const key = u => String(u).split('?')[0];
+  const skip = new Set([...impData.groups.filter((_, i) => i !== impSel).map(g => key(g.img)), ...adminImgs.map(key)]);
+  const extras = impData.images.filter(u => !skip.has(key(u)));
+  box.innerHTML = extras.length
+    ? `<div class="imp-extra-title">Más fotos del modelo (toca para agregar)</div>
+       <div class="imp-extra-list">${extras.map(u => `<button type="button" class="imp-thumb" data-u="${escHtml(u)}"><img src="${escHtml(u)}" alt="" loading="lazy"></button>`).join('')}</div>`
+    : '';
+}
+
+function selectImportColor(i) {
+  impSel = i;
+  const g = impData.groups[i], multi = impData.groups.length > 1;
+  const set = (id, v) => { document.getElementById(id).value = v; };
+  set('f-brand', impData.brand);
+  set('f-name', multi && g.colorShort ? `${impData.model} (${g.colorShort})` : impData.model);
+  if (impData.gender) set('f-gender', impData.gender);
+  set('f-desc', g.colorShort ? 'Color: ' + g.colorShort : '');
+  document.querySelectorAll('.size-checkbox').forEach(cb => { cb.checked = false; });
+  g.sizes.forEach(sz => { ensureSizeChip(sz).checked = true; });
+  adminImgs = [g.img].filter(Boolean); renderImgPreviews();
+  if (g.compare > g.usd) set('f-badge', 'sale');
+  set('c-usd', g.usd.toFixed(2)); calcPrecio();
+  if (calcResult != null) set('f-price', calcResult);
+  renderImportColors(); renderImportExtras();
+  const st = document.getElementById('imp-status');
+  if (g.soldOut)               st.textContent = '⚠️ Ese color está agotado en el proveedor.';
+  else if (calcResult == null) st.textContent = '✅ Datos cargados. Falta la TRM: escríbela en la calculadora y toca "Usar como precio de venta".';
+  else                         st.textContent = `✅ Listo: ${g.sizes.length} tallas disponibles y precio ${cop(calcResult)}. Revisa y toca "Guardar producto".`;
+}
+
+function applyImport(data) {
+  impData = normalizeShopify(data);
+  document.getElementById('imp-manual').style.display = 'none';
+  // color con más tallas disponibles primero
+  let best = 0;
+  impData.groups.forEach((g, i) => { if (g.sizes.length > impData.groups[best].sizes.length) best = i; });
+  selectImportColor(best);
+  if (impData.groups.length > 1) {
+    const st = document.getElementById('imp-status');
+    st.textContent += ` Este modelo tiene ${impData.groups.length} colores: elige cuál agregar.`;
+  }
+}
+
+async function importFromLink() {
+  const raw = document.getElementById('imp-url').value.trim();
+  const st = document.getElementById('imp-status');
+  if (!raw) { st.textContent = 'Pega el link del producto.'; return; }
+  st.textContent = '⏳ Trayendo datos del producto...';
+  try {
+    applyImport(await fetchShopifyProduct(raw));
+  } catch (e) {
+    if (e.message === 'MANUAL') {
+      document.getElementById('imp-manual-link').href = e.target;
+      document.getElementById('imp-manual').style.display = 'flex';
+      st.textContent = '⚠️ El navegador no me deja leer la tienda directamente. Hazlo en 2 pasos con el enlace de abajo.';
+    } else { st.textContent = '⚠️ ' + e.message; }
+  }
+}
+function importFromPastedText() {
+  const st = document.getElementById('imp-status');
+  try { applyImport(JSON.parse(document.getElementById('imp-json').value.trim())); }
+  catch (e) { st.textContent = '⚠️ ' + (/Unexpected|JSON/.test(e.message) ? 'Ese texto no está completo. Copia todo lo que aparece en la página.' : e.message); }
+}
+(function initImport() {
+  const url = document.getElementById('imp-url');
+  document.getElementById('imp-go').addEventListener('click', importFromLink);
+  url.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); importFromLink(); } });
+  url.addEventListener('paste', () => setTimeout(importFromLink, 60));
+  document.getElementById('imp-manual-go').addEventListener('click', importFromPastedText);
+  document.getElementById('imp-colors').addEventListener('click', e => {
+    const b = e.target.closest('.imp-color'); if (b && impData) selectImportColor(parseInt(b.dataset.i));
+  });
+  document.getElementById('imp-extra').addEventListener('click', e => {
+    const t = e.target.closest('[data-u]'); if (!t) return;
+    if (adminImgs.length >= 6) { showToast('⚠️ Máximo 6 fotos'); return; }
+    if (!adminImgs.includes(t.dataset.u)) { adminImgs.push(t.dataset.u); renderImgPreviews(); renderImportExtras(); }
+  });
+})();
 
 // ═══════════════════════════
 // CLIENTES
@@ -1682,6 +2121,18 @@ async function eliminarVenta(id) {
     </div>
   `).join('');
 })();
+document.querySelectorAll('[data-wa]').forEach(a => a.href = waBase());
+document.querySelectorAll('#gender-chips .chip').forEach(c => c.addEventListener('click', () => {
+  flt.gender = c.dataset.g; writeFiltersToURL(); renderGrid();
+}));
+document.getElementById('flt-size').addEventListener('change', e => {
+  flt.size = e.target.value; writeFiltersToURL(); renderGrid();
+});
+document.getElementById('flt-share').addEventListener('click', async () => {
+  const url = location.origin + location.pathname + location.search;
+  try { await navigator.clipboard.writeText(url); showToast('🔗 Link copiado'); }
+  catch (e) { window.prompt('Copia este link:', url); }
+});
 loadAllData();
 </script>
 </body>
