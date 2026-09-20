@@ -73,5 +73,20 @@
     "gender": "Hombre",
     "wa": "",
     "creadoEn": "2026-09-20T05:00:00.000Z"
+  },
+  {
+    "id": "mua2tq0h27yh",
+    "brand": "Adidas",
+    "name": "adidas men RUN 70s 2.0 Shoes",
+    "price": 260000,
+    "priceOrig": 340000,
+    "desc": "",
+    "sizes": "[\"7\",\"7.5\",\"8\",\"8.5\",\"9\",\"9.5\",\"10\",\"10.5\",\"11\"]",
+    "imgs": "[\"https://assets.adidas.com/images/7fa5df2d16a2414fa5fd924ad105b7c3_9366/JR2382_00_plp_standard.jpgJR2382_00_plp_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/cd69953ba5ba48e4924e4d45c37ddd8d_9366/JR2382_04_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/ea6e38e458df4248bda90109112e3b53_9366/JR2382_05_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/e2344da816bb4ae08d4fb70b82ab42dc_9366/JR2382_09_standard.jpg\"]",
+    "img": "https://assets.adidas.com/images/7fa5df2d16a2414fa5fd924ad105b7c3_9366/JR2382_00_plp_standard.jpgJR2382_00_plp_standard.jpg",
+    "badge": "sale",
+    "gender": "Hombre",
+    "wa": "",
+    "creadoEn": "2026-09-20T05:00:00.000Z"
   }
 ]
