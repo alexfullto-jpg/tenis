@@ -13,20 +13,5 @@
     "gender": "Hombre",
     "wa": "",
     "creadoEn": "2026-09-06T05:00:00.000Z"
-  },
-  {
-    "id": "mtqoqlxyirq8",
-    "brand": "Adidas",
-    "name": "Barreda Decode Shoes",
-    "price": 240000,
-    "priceOrig": 300000,
-    "desc": "Estas zapatillas adidas rinden homenaje al estilo de las terrazas. Su diseño con puntera en forma de T es moderno y atemporal, y su suela de goma garantiza comodidad durante todo el día. La parte superior de piel de primera calidad y los detalles de ante crean un look sofisticado que puedes lucir en cualquier ocasión. Tanto si te relajas en tu cafetería favorita como si exploras la ciudad, estas zapatillas te permiten disfrutar de todo.",
-    "sizes": "[\"8\",\"8.5\",\"9\",\"9.5\",\"10\",\"10.5\",\"11\",\"11.5\",\"12\"]",
-    "imgs": "[\"https://assets.adidas.com/images/d145785fe67d4179841eb74d74a9bdc5_9366/JR1229_00_plp_standard.jpgJR1229_00_plp_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/c614391ae8af415c8bd820589f26431c_9366/JR1229_04_standard.jpg\",\"https://assets.adidas.com/images/w_840,h_840,f_auto,q_auto:sensitive,fl_lossy/d9a47a9dc6424c3bb2180d005ee393d4_9366/JR1229_05_standard.jpg\"]",
-    "img": "https://assets.adidas.com/images/d145785fe67d4179841eb74d74a9bdc5_9366/JR1229_00_plp_standard.jpgJR1229_00_plp_standard.jpg",
-    "badge": "sale",
-    "gender": "Hombre",
-    "wa": 3136245018,
-    "creadoEn": "2026-09-07T05:00:00.000Z"
   }
 ]
