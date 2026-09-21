@@ -473,7 +473,8 @@
     font: 700 13px var(--font-body); cursor: pointer; border-radius: 2px; white-space: nowrap;
   }
   .imp-btn-sm { padding: 4px 10px; margin-left: 8px; font-size: 11px; }
-  .imp-status { font-size: 13px; line-height: 1.5; color: var(--gray-dark); min-height: 18px; }
+  .imp-status { font-size: 13px; line-height: 1.5; color: var(--gray-dark); }
+  .imp-status:empty, .imp-colors:empty, #imp-extra:empty { display: none; }
   .imp-colors { display: flex; flex-wrap: wrap; gap: 8px; }
   .imp-color {
     display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; text-align: left;
@@ -667,9 +668,114 @@
     .form-row.three { grid-template-columns: 1fr; }
     .admin-body { padding: 20px; }
   }
+  /* ── BOTÓN FLOTANTE WHATSAPP ── */
+  .wa-float {
+    position: fixed; right: 16px; bottom: 16px; z-index: 90;
+    display: flex; align-items: center; gap: 8px;
+    background: #25D366; color: #fff; text-decoration: none;
+    padding: 12px 18px; border-radius: 999px; font: 700 14px var(--font-body);
+    box-shadow: 0 6px 18px rgba(0,0,0,.28);
+  }
+  .wa-float:focus-visible { outline: 3px solid var(--black); outline-offset: 2px; }
+  html { scroll-padding-top: 72px; }
+  .size-pill.more { background: transparent; border-color: transparent; color: var(--gray-mid); }
+
+  /* ═══════════ CELULAR ═══════════ */
+  @media (max-width: 768px) {
+    /* escribir en campos sin que el iPhone haga zoom */
+    .form-group input, .form-group select, .form-group textarea, .login-field,
+    .filter-size select, .imp-row input, #imp-manual textarea, .img-input-row input { font-size: 16px; }
+
+    /* Portada compacta: el catálogo se ve casi de inmediato */
+    nav { padding: 12px 16px; }
+    .nav-logo { font-size: 24px; }
+    .hero { min-height: 0; }
+    .hero-right { display: none; }
+    .hero-left { padding: 28px 20px 30px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 2px; margin-bottom: 14px; }
+    .hero-title { font-size: 46px; margin-bottom: 14px; }
+    .hero-sub { font-size: 14px; margin-bottom: 22px; max-width: none; }
+    .hero-cta { width: 100%; justify-content: center; padding: 15px 20px; }
+    .stats-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 8px; padding: 12px 16px; }
+    .stat-num { font-size: 22px; }
+    .stat-label { font-size: 9px; letter-spacing: 1px; }
+
+    /* Catálogo en 2 columnas */
+    .section { padding: 28px 12px 40px; }
+    .section-title { font-size: 34px; }
+    .section-subtitle { font-size: 13px; max-width: none; }
+    .section-header { margin-bottom: 18px; }
+    .filters { gap: 12px 16px; margin-bottom: 12px; }
+    .chip { padding: 9px 13px; }
+    .filters > .filter-block:first-child { flex-basis: 100%; }
+    .filter-share { flex: 1; min-width: 0; text-align: center; padding: 11px 10px; }
+    .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .product-card { padding: 10px; border-radius: 6px; }
+    .card-badges { flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+    .badge { font-size: 9px; padding: 3px 6px; }
+    .card-img-wrap { aspect-ratio: 1 / 1; margin-bottom: 10px; }
+    .card-brand { font-size: 10px; letter-spacing: 1px; }
+    .card-name { font-size: 14px; margin-bottom: 8px; }
+    .card-desc { display: none; }
+    .card-footer { flex-wrap: wrap; }
+    .card-price { font-size: 17px; }
+    .card-price-original { display: block; margin: 2px 0 0; font-size: 11px; }
+    .card-arrow { display: none; }
+    .product-card .sizes-pills { gap: 3px; margin-top: 8px; }
+    .product-card .size-pill { padding: 3px 6px; font-size: 10px; }
+    .empty-state { grid-column: 1 / -1; }
+    .toast { left: 16px; right: 16px; bottom: 84px; text-align: center; }
+    footer { padding: 24px 20px 84px; }
+
+    /* Detalle del producto como hoja desde abajo, con el botón siempre a la vista */
+    #detail-overlay { padding: 0; align-items: flex-end; }
+    .product-detail { max-width: none; max-height: 92vh; max-height: 92dvh; overflow-y: auto; border-radius: 16px 16px 0 0; }
+    .gallery-main { padding: 16px; }
+    .gallery-main img { max-width: 100%; max-height: 240px; }
+    .detail-body { padding: 20px 20px 12px; }
+    .detail-name { font-size: 22px; }
+    .detail-price { font-size: 28px; }
+    .detail-price-orig { font-size: 15px; }
+    .detail-cta { position: sticky; bottom: 0; padding: 16px; box-shadow: 0 -10px 16px rgba(255,255,255,.95); }
+    .detail-close { top: 10px; right: 10px; }
+
+    /* Panel admin a pantalla completa */
+    #admin-overlay { padding: 0; align-items: stretch; }
+    .admin-panel { max-width: none; max-height: none; height: 100%; }
+    .admin-header { padding: 14px 16px; }
+    .admin-title { font-size: 22px; }
+    .admin-body { padding: 16px; }
+    .admin-tabs { flex-wrap: nowrap; overflow-x: auto; margin-bottom: 20px; scrollbar-width: none; }
+    .admin-tabs::-webkit-scrollbar { display: none; }
+    .admin-tab { white-space: nowrap; flex: 0 0 auto; padding: 12px 14px; }
+    .product-form > * { min-width: 0; }
+    .form-group input, .form-group select, .form-group textarea { min-width: 0; width: 100%; }
+    .calc-box { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 12px; }
+    .import-box { padding: 12px; }
+    .imp-row { flex-direction: column; }
+    .imp-btn { width: 100%; padding: 13px; }
+    .img-input-row { flex-direction: column; }
+    .login-panel { padding: 32px 24px; }
+    .imp-btn.imp-btn-sm { width: auto; padding: 6px 12px; margin: 6px 0 0; display: inline-block; }
+    .imp-color { width: 100%; }
+    .imp-color.sel { box-shadow: inset 0 0 0 1px var(--black); }
+    /* Lista de productos del admin: botones debajo, sin desbordar */
+    .admin-product-item { flex-wrap: wrap; gap: 10px 12px; padding: 12px; }
+    .admin-product-info { flex: 1 1 0; min-width: 0; }
+    .admin-product-info strong { overflow-wrap: anywhere; }
+    .admin-product-actions { flex: 1 1 100%; }
+    .admin-product-actions > * { flex: 1; padding: 10px 14px; }
+    /* Clientes y cuentas */
+    .cliente-body > div[style*="display:flex"] { flex-wrap: wrap; }
+    .venta-item { flex-wrap: wrap; }
+    .venta-info { min-width: 0; flex: 1 1 60%; }
+    #deudas-list [style*="display:flex"] { flex-wrap: wrap; }
+  }
 </style>
 </head>
 <body>
+
+<a class="wa-float" id="wa-float" href="https://wa.me/573136245018?text=Hola!%20Vi%20tu%20cat%C3%A1logo%20de%20tenis%20y%20quiero%20m%C3%A1s%20info" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">💬 <span>WhatsApp</span></a>
 
 <!-- NAV -->
 <nav>
@@ -1234,6 +1340,15 @@ function filteredProducts() {
   });
 }
 
+// Tarjeta: muestra pocas tallas (y "+N") para que no ocupe media pantalla en el celular
+function cardPills(sizesArr, max = 5) {
+  const arr = sizesArr.map(String);
+  const shown = arr.slice(0, max);
+  if (flt.size && arr.includes(flt.size) && !shown.includes(flt.size)) shown[shown.length - 1] = flt.size;
+  const more = arr.length - shown.length;
+  return `<div class="sizes-pills">${shown.map(s => `<span class="size-pill${s === flt.size ? ' sel' : ''}">${s}</span>`).join('')}${more > 0 ? `<span class="size-pill more">+${more}</span>` : ''}</div>`;
+}
+
 function renderGrid() {
   const grid  = document.getElementById('products-grid');
   const count = products.length;
@@ -1270,8 +1385,7 @@ function renderGrid() {
   }
   grid.innerHTML = list.map(p => {
     const sizesArr = Array.isArray(p.sizes) ? p.sizes : [];
-    const pillsHtml = sizesArr.length
-      ? `<div class="sizes-pills">${sizesArr.map(s=>`<span class="size-pill${String(s)===flt.size?' sel':''}">${s}</span>`).join('')}</div>` : '';
+    const pillsHtml = sizesArr.length ? cardPills(sizesArr) : '';
     return `
     <div class="product-card" onclick="openDetail('${p.id}')">
       <div class="card-badges">
@@ -2161,6 +2275,7 @@ async function eliminarVenta(id) {
   `).join('');
 })();
 document.querySelectorAll('[data-wa]').forEach(a => a.href = waBase());
+document.getElementById('wa-float').href = waBase() + '?text=' + encodeURIComponent('Hola! Vi tu catálogo de tenis y quiero más info');
 document.querySelectorAll('#gender-chips .chip').forEach(c => c.addEventListener('click', () => {
   flt.gender = c.dataset.g; writeFiltersToURL(); renderGrid();
 }));
